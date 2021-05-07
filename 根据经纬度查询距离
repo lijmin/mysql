@@ -1,0 +1,7 @@
+-- 保存的经纬度乘了10的6次方
+set @lon = 113.915147;
+set @lat = 22.562942;
+
+select id
+from shopwt_meituan_hotel
+where (2 * asin(sqrt(pow(sin((RADIANS(@lat)-RADIANS(latitude/1000000)) / 2), 2) + cos(RADIANS(@lat)) * cos(RADIANS(latitude/1000000)) * pow(sin((RADIANS(@lon)-RADIANS(longitude/1000000)) / 2), 2)))) * 6378137 < 5000
